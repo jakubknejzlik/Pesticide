@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Rocketmade. All rights reserved.
 //
 
+import UIKit
+import Pesticide
+
 class SampleViewController : UIViewController, UITextFieldDelegate {
     
     let textField: UITextField = UITextField()

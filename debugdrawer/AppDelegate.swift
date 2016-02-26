@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Pesticide
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -33,7 +33,7 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
         self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
         let cellIds : Array<ControlType> = [.Switch, .Slider, .Button, .TextInput, .Label, .Header]
         for type in cellIds {
-            self.tableView.registerNib(UINib(nibName: type.rawValue, bundle: nil), forCellReuseIdentifier:type.rawValue)
+            self.tableView.registerNib(UINib(nibName: type.rawValue, bundle: NSBundle(forClass: DebugTableController.self)), forCellReuseIdentifier:type.rawValue)
         }
         self.readCurrentLog()
         self.tableView.tableHeaderView = self.consoleView
