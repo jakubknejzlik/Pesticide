@@ -35,7 +35,7 @@ public class Pesticide {
     public class func addCommand(commandName: String, block: Array<String> -> ()) {
         if !CV.hasCommandPrompt {
             self.addTextInput("Commands", block: {(command: String) in
-                if command.utf16Count < 1 {
+                if command.characters.count < 1 {
                     return
                 }
                 self.runFullCommand(command)
@@ -175,24 +175,25 @@ public class Pesticide {
         
         let logOptions = ["All":"All","Verbose":"Verbose","Debug":"Debug","Info":"Info","Warning":"Warning","Error":"Error","Off":"Off"];
         Pesticide.addDropdown("Verbose", name: "Log Level", options: logOptions, block: {(option:AnyObject) in
-            let newLevel = option as String
-            switch newLevel {
-            case "All":
-                DDLog.logLevel = .All
-            case "Verbose":
-                DDLog.logLevel = .Verbose
-            case "Debug":
-                DDLog.logLevel = .Debug
-            case "Info":
-                DDLog.logLevel = .Info
-            case "Warning":
-                DDLog.logLevel = .Warning
-            case "Error":
-                DDLog.logLevel = .Error
-            case "Off":
-                DDLog.logLevel = .Off
-            default:
-                DDLog.logLevel = .Verbose
+            if let newLevel = option as? String {
+                switch newLevel {
+                case "All":
+                    DDLog.logLevel = .All
+                case "Verbose":
+                    DDLog.logLevel = .Verbose
+                case "Debug":
+                    DDLog.logLevel = .Debug
+                case "Info":
+                    DDLog.logLevel = .Info
+                case "Warning":
+                    DDLog.logLevel = .Warning
+                case "Error":
+                    DDLog.logLevel = .Error
+                case "Off":
+                    DDLog.logLevel = .Off
+                default:
+                    DDLog.logLevel = .Verbose
+                }
             }
         })
     }

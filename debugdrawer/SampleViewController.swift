@@ -14,15 +14,15 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
     let coolLabel: UILabel = UILabel()
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    override init() {
-        super.init()
+    override func loadView() {
+        super.loadView()
         self.setupView()
         
         self.enterButton.addTarget(self, action: Selector("enterButtonTouch:"), forControlEvents: .TouchUpInside)
@@ -33,7 +33,7 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
                     Pesticide.log("Hurray a log")
                     return
                 }
-                if let times = components[0].toInt() {
+                if let times = Int(components[0]) {
                     for count in 0..<times {
                         Pesticide.log("did it \(count)")
                     }
@@ -45,16 +45,16 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
                     Pesticide.log("Ouch")
                     return
                 }
-                if let times = components[0].toInt() {
+                if let times = Int(components[0]) {
                     for count in 0..<times {
                         Pesticide.log("die, die, die")
                     }
                 }
             })
             
-            Pesticide.addButton("Panic Button", { () in
+            Pesticide.addButton("Panic Button") { () in
                 assert(false, "SOME CRASH AHHHH!!!!")
-            })
+            }
             
             Pesticide.addSlider(Float(self.view.alpha),name:"Alpha", block: { (value :Float) in
                 let currentColor = self.view.backgroundColor
@@ -66,20 +66,21 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
             })
             
             Pesticide.addDropdown("Blue",name: "Color", options: ["Black":UIColor.blackColor(),"Blue":UIColor.blueColor(),"Red":UIColor.redColor(),"Green":UIColor.greenColor()], block:{(option:AnyObject) in
-                let newColor = option as UIColor
-                self.view.backgroundColor = newColor
+                if let newColor = option as? UIColor {
+                    self.view.backgroundColor = newColor
+                }
                 })
 
-            Pesticide.addButton("Network Request", { () in
-                (UIApplication.sharedApplication().delegate as AppDelegate).makeNetworkRequest()
-            })
+//            Pesticide.addButton("Network Request") { () in
+//                (UIApplication.sharedApplication().delegate as! AppDelegate).makeNetworkRequest()
+//            }
         #endif
         
         print("sample inited")
     }
     
     func enterButtonTouch(sender: UIButton!) {
-        self.label.text = "Hello, " + self.textField.text
+        self.label.text = "Hello, \(self.textField.text ?? "")"
         #if DEBUG
             Pesticide.log("INPUT: \(self.textField.text)")
         #endif
@@ -95,10 +96,10 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
         self.coolLabel.backgroundColor = .yellowColor()
         self.coolLabel.textColor = .blackColor()
         
-        self.textField.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.enterButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.label.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.coolLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.textField.translatesAutoresizingMaskIntoConstraints = false
+        self.enterButton.translatesAutoresizingMaskIntoConstraints = false
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.coolLabel.translatesAutoresizingMaskIntoConstraints = false
 
         self.textField.delegate = self
         
@@ -127,20 +128,20 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
                         "coolLabel": self.coolLabel]
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(40)-[textField(40)]-[button(40)]-[label(40)]", options: NSLayoutFormatOptions(0), metrics: nil, views: bindings))
+            "V:|-(40)-[textField(40)]-[button(40)]-[label(40)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(40)-[coolLabel(40)]", options: NSLayoutFormatOptions(0), metrics: nil, views: bindings))
+            "V:|-(40)-[coolLabel(40)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[textField]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: bindings))
+            "|-[textField]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[button]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: bindings))
+            "|-[button]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
 
         self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "|-[label]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: bindings))
+            "|-[label]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-[coolLabel]-|", options: NSLayoutFormatOptions(0), metrics: nil, views: bindings))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|-[coolLabel]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: bindings))
     }
 }

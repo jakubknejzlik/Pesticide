@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DeviceUtils {
     class func getDeviceVersionString() -> String {

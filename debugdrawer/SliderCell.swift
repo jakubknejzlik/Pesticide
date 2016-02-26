@@ -11,10 +11,10 @@ import UIKit
 class SliderCell: PesticideCell {
 
     @IBOutlet weak var slider: UISlider!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
 }

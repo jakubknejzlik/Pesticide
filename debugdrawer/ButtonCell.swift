@@ -11,7 +11,7 @@ import UIKit
 class ButtonCell: PesticideCell {
 
     @IBOutlet weak var button: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +22,7 @@ class ButtonCell: PesticideCell {
 
         // Configure the view for the selected state
     }
-    
+
     override func setName (name: String){
         self.button.setTitle(name, forState: UIControlState.Normal)
     }

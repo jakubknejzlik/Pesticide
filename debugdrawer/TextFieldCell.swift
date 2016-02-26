@@ -11,7 +11,7 @@ import UIKit
 class TextFieldCell: PesticideCell,UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,7 +19,7 @@ class TextFieldCell: PesticideCell,UITextFieldDelegate {
         textField.returnKeyType = UIReturnKeyType.Go
         textField.delegate = self
     }
-    
+
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }

@@ -18,7 +18,7 @@ class Proxy {
         }
 
         let host = hostAndPortArr[0]
-        let port = hostAndPortArr[1].toInt()
+        let port = Int(hostAndPortArr[1])
 
         if port != nil {
             return createSessionConfigurationFromHost(host, port: port!)
@@ -38,7 +38,6 @@ class Proxy {
 
         let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         sessionConfiguration.connectionProxyDictionary = dict
-
 
         return sessionConfiguration
     }

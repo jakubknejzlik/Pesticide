@@ -17,9 +17,9 @@ class Preferences {
     class func load(key: String) -> AnyObject? {
         return NSUserDefaults.standardUserDefaults().valueForKey(key)
     }
-    
+
     class func loadString(key: String) -> String {
-        return NSUserDefaults.standardUserDefaults().valueForKey(key) as String
+        return (NSUserDefaults.standardUserDefaults().valueForKey(key) as? String) ?? ""
     }
 
     class func isSet(key: String) -> Bool {

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		755AE74A006A11B6E4C2985F /* libPods-debugdrawerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8773641C1EAB6B8C576455A /* libPods-debugdrawerTests.a */; };
-		7E26CB1208067BF78297DBF6 /* libPods-debugdrawer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A497ABC7E5B8C33E4743544 /* libPods-debugdrawer.a */; };
+		3A35F2401546C483DD5D0755 /* Pods_debugdrawer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0A64AC55EE6BC985BB314FC /* Pods_debugdrawer.framework */; };
+		5F6226451C808D4900C552BF /* CrosshairOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8137D1A20855E00D02B8D /* CrosshairOverlay.swift */; };
+		7548817FF0CC4DC24B26164C /* Pods_debugdrawerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC21C8DBFBD31B225D2D100 /* Pods_debugdrawerTests.framework */; };
 		BC084C321A1F9DE400E68797 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC084C311A1F9DE400E68797 /* DebugView.swift */; };
 		BC084C341A1F9FA800E68797 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC084C331A1F9FA800E68797 /* SampleViewController.swift */; };
 		BC084C361A1FCE7600E68797 /* Pesticide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC084C351A1FCE7600E68797 /* Pesticide.swift */; };
@@ -37,7 +38,6 @@
 		BD649D6D1A202FA50030ECAF /* DeviceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD649D6C1A202FA50030ECAF /* DeviceUtils.swift */; };
 		BD649DA11A205D4D0030ECAF /* ViewInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD649DA01A205D4D0030ECAF /* ViewInspector.swift */; };
 		BD649DA41A205D7D0030ECAF /* UIView+Pesticide.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD649DA31A205D7D0030ECAF /* UIView+Pesticide.swift */; };
-		BDE8137E1A20855E00D02B8D /* CrosshairOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8137D1A20855E00D02B8D /* CrosshairOverlay.swift */; };
 		BDE813821A20926600D02B8D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC758B271A20684C00BD0283 /* Alamofire.framework */; };
 		BDE813831A20928500D02B8D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC758B271A20684C00BD0283 /* Alamofire.framework */; };
 		BDE813841A20928500D02B8D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC758B271A20684C00BD0283 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -101,7 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4A497ABC7E5B8C33E4743544 /* libPods-debugdrawer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-debugdrawer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CC21C8DBFBD31B225D2D100 /* Pods_debugdrawerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debugdrawerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		738FEBE8D704B120B7DE7616 /* Pods-debugdrawerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debugdrawerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-debugdrawerTests/Pods-debugdrawerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8EE3F03714FA91F2E8A164CC /* Pods-debugdrawer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debugdrawer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-debugdrawer/Pods-debugdrawer.debug.xcconfig"; sourceTree = "<group>"; };
 		A8497FBABC9059FB399DB179 /* Pods-debugdrawerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debugdrawerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-debugdrawerTests/Pods-debugdrawerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,11 +141,11 @@
 		BD649DA31A205D7D0030ECAF /* UIView+Pesticide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Pesticide.swift"; sourceTree = "<group>"; };
 		BDE8137D1A20855E00D02B8D /* CrosshairOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrosshairOverlay.swift; sourceTree = "<group>"; };
 		BDE813881A20990E00D02B8D /* TouchTrackerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchTrackerView.swift; sourceTree = "<group>"; };
+		C0A64AC55EE6BC985BB314FC /* Pods_debugdrawer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_debugdrawer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D624A2E71A1FB3AB00B71EF5 /* DebugTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTableController.swift; sourceTree = "<group>"; };
 		D624A2ED1A1FC9EE00B71EF5 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 		D624A2F71A1FF2CA00B71EF5 /* PesticideLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PesticideLogger.swift; sourceTree = "<group>"; };
 		D624A2F91A200C8B00B71EF5 /* RowControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowControl.swift; sourceTree = "<group>"; };
-		D8773641C1EAB6B8C576455A /* libPods-debugdrawerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-debugdrawerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E23FBB86D95DA65C266D290E /* Pods-debugdrawer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-debugdrawer.release.xcconfig"; path = "Pods/Target Support Files/Pods-debugdrawer/Pods-debugdrawer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +156,7 @@
 			files = (
 				BDE813821A20926600D02B8D /* Alamofire.framework in Frameworks */,
 				BDE813831A20928500D02B8D /* Alamofire.framework in Frameworks */,
-				7E26CB1208067BF78297DBF6 /* libPods-debugdrawer.a in Frameworks */,
+				3A35F2401546C483DD5D0755 /* Pods_debugdrawer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				755AE74A006A11B6E4C2985F /* libPods-debugdrawerTests.a in Frameworks */,
+				7548817FF0CC4DC24B26164C /* Pods_debugdrawerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +185,8 @@
 		62CD7D1B538C88106D05A59F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A497ABC7E5B8C33E4743544 /* libPods-debugdrawer.a */,
-				D8773641C1EAB6B8C576455A /* libPods-debugdrawerTests.a */,
+				C0A64AC55EE6BC985BB314FC /* Pods_debugdrawer.framework */,
+				4CC21C8DBFBD31B225D2D100 /* Pods_debugdrawerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -335,6 +335,7 @@
 				BD649D6A1A2028DB0030ECAF /* Copy git hash */,
 				BD649D6B1A202D320030ECAF /* Get Date */,
 				BDE813871A20928500D02B8D /* Embed Frameworks */,
+				48371C6227AE08BC2DE8425B /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -356,6 +357,7 @@
 				BD361B7D1A1F8C6D006AE819 /* Frameworks */,
 				BD361B7E1A1F8C6D006AE819 /* Resources */,
 				FDA443B2A7DE87856A81DFCA /* Copy Pods Resources */,
+				4CFA9A1F1B5F49A758E4C2CB /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -454,6 +456,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		48371C6227AE08BC2DE8425B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-debugdrawer/Pods-debugdrawer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4CFA9A1F1B5F49A758E4C2CB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-debugdrawerTests/Pods-debugdrawerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8135C24A30AAD6ED708EE777 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,6 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD649D691A2028210030ECAF /* BuildUtils.swift in Sources */,
+				5F6226451C808D4900C552BF /* CrosshairOverlay.swift in Sources */,
 				BCC48DE71A20254000C2AB4F /* PesticideCell.swift in Sources */,
 				D624A2FA1A200C8B00B71EF5 /* RowControl.swift in Sources */,
 				BDE813891A20990E00D02B8D /* TouchTrackerView.swift in Sources */,
@@ -565,7 +598,6 @@
 				D624A2E81A1FB3AB00B71EF5 /* DebugTableController.swift in Sources */,
 				BC084C341A1F9FA800E68797 /* SampleViewController.swift in Sources */,
 				BCC48DF01A202E2100C2AB4F /* TextFieldCell.swift in Sources */,
-				BDE8137E1A20855E00D02B8D /* CrosshairOverlay.swift in Sources */,
 				BC084C361A1FCE7600E68797 /* Pesticide.swift in Sources */,
 				BD649D6D1A202FA50030ECAF /* DeviceUtils.swift in Sources */,
 				BD649DA41A205D7D0030ECAF /* UIView+Pesticide.swift in Sources */,
@@ -714,7 +746,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = debugdrawer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -729,7 +761,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = debugdrawer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

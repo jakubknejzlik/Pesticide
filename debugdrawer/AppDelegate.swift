@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         #if DEBUG
             let threeFingerTap = UITapGestureRecognizer(target: self, action: Selector("threeFingerTap"))
-            threeFingerTap.numberOfTouchesRequired = 3
+            threeFingerTap.numberOfTouchesRequired = 2
             self.window?.addGestureRecognizer(threeFingerTap)
             
             Pesticide.setWindow(self.window!)
@@ -42,16 +42,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func makeNetworkRequest() {
-        self.manager?.request(Router.ROOT).response { (request, response, data, error) in
-            println(request)
-            println(response)
-            println(data)
-            println(error)
-            Pesticide.log("Network call success")
-        }
-    }
-    
+//    func makeNetworkRequest() {
+//        self.manager?.request(Router.ROOT).response { (request, response, data, error) in
+//            println(request)
+//            println(response)
+//            println(data)
+//            println(error)
+//            Pesticide.log("Network call success")
+//        }
+//    }
+
 #if DEBUG
     func threeFingerTap() {
         Pesticide.toggle()
@@ -82,33 +82,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-enum Router: URLRequestConvertible {
-    static let baseURLString = "http://httpbin.org"
-
-    case ROOT
-    
-    var method: Alamofire.Method {
-        switch self {
-        case .ROOT:
-            return .GET
-        }
-    }
-    
-    // MARK: URLRequestConvertible
-    
-    var URLRequest:NSURLRequest {
-        let (path: String, parameters: [String: AnyObject]?) = {
-            switch (self) {
-            case .ROOT:
-                return ("/", nil)
-            }
-            }()
-        
-        let URL = NSURL(string: Router.baseURLString)!
-        let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
-        URLRequest.HTTPMethod = method.rawValue
-        
-        return URLRequest
-    }
-}
+//enum Router: URLRequestConvertible {
+//    static let baseURLString = "http://httpbin.org"
+//
+//    case ROOT
+//    
+//    var method: Alamofire.Method {
+//        switch self {
+//        case .ROOT:
+//            return .GET
+//        }
+//    }
+//    
+//    // MARK: URLRequestConvertible
+//    
+//    var URLRequest:NSURLRequest {
+//        let (path: String, parameters: [String: AnyObject]?) = {
+//            switch (self) {
+//            case .ROOT:
+//                return ("/", nil)
+//            }
+//            }()
+//        
+//        let URL = NSURL(string: Router.baseURLString)!
+//        let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+//        URLRequest.HTTPMethod = method.rawValue
+//        
+//        return URLRequest
+//    }
+//}
 

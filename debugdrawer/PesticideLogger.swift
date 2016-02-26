@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class PesticideLogger: DDAbstractLogger {
-    
+
     var textView : UITextView?
     var dateFormatter : NSDateFormatter
     override init() {
@@ -17,7 +18,7 @@ class PesticideLogger: DDAbstractLogger {
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
         super.init()
     }
-    
+
     override func logMessage(logMessage: DDLogMessage!) {
         if  self.textView != nil {
             if  logMessage != nil {
@@ -28,13 +29,13 @@ class PesticideLogger: DDAbstractLogger {
                         logString = currentText
                     }
                     self.textView!.text = logString + "\n"
-                    self.textView?.scrollRangeToVisible(NSMakeRange(logString.utf16Count - 1, 1))
+                    self.textView?.scrollRangeToVisible(NSMakeRange(logString.characters.count - 1, 1))
                 })
             }
         }
         return
     }
-    
+
     func formatMessage(logMessage : DDLogMessage) -> String {
         let message = logMessage.message
         let date = logMessage.timestamp

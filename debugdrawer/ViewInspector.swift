@@ -29,7 +29,7 @@ class ViewInspector {
         self.addDeleteBlock(rootView)
 
         for subview in rootView.subviews {
-            self.recurseThroughSubviews(subview as UIView)
+            self.recurseThroughSubviews(subview)
         }
     }
 
@@ -70,8 +70,8 @@ class ViewInspector {
         rootView.restoreDefaults()
 
         for subview in rootView.subviews {
-            done(subview as UIView)
+            done(subview)
         }
     }
-    
+
 }

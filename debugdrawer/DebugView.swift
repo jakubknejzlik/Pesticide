@@ -12,14 +12,15 @@ class DebugView : UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        initInit()
     }
-    
-    required init(coder aDecoder: NSCoder) {
+
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        initInit()
     }
-    
-    override init() {
-        super.init()
+
+    func initInit() {
         self.backgroundColor = .yellowColor()
     }
 }

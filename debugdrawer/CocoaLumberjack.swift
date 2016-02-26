@@ -21,38 +21,38 @@ extension DDLog {
         set { State.logAsync = newValue }
     }
     
-    class func log(flag: DDLogFlag, message: @autoclosure () -> String,
+    class func log(flag: DDLogFlag, @autoclosure message: () -> String,
         function: String = __FUNCTION__, file: String = __FILE__,  line: UInt = __LINE__) {
             if flag.rawValue & logLevel.rawValue != 0 {
                 var logMsg = DDLogMessage(message: message(), level: logLevel, flag: flag, context: 0,
                     file: file, function: function, line: line,
-                    tag: nil, options: DDLogMessageOptions(0), timestamp: nil)
+                    tag: nil, options: DDLogMessageOptions(rawValue: 0), timestamp: nil)
                 DDLog.log(logAsync, message: logMsg)
             }
     }
 }
 
-func logError(message: @autoclosure () -> String, function: String = __FUNCTION__,
+func logError(@autoclosure message: () -> String, function: String = __FUNCTION__,
     file: String = __FILE__, line: UInt = __LINE__) {
         DDLog.log(.Error, message: message, function: function, file: file, line: line)
 }
 
-func logWarn(message: @autoclosure () -> String, function: String = __FUNCTION__,
+func logWarn(@autoclosure message: () -> String, function: String = __FUNCTION__,
     file: String = __FILE__, line: UInt = __LINE__) {
         DDLog.log(.Warning, message: message, function: function, file: file, line: line)
 }
 
-func logInfo(message: @autoclosure () -> String, function: String = __FUNCTION__,
+func logInfo(@autoclosure message: () -> String, function: String = __FUNCTION__,
     file: String = __FILE__, line: UInt = __LINE__) {
         DDLog.log(.Info, message: message, function: function, file: file, line: line)
 }
 
-func logDebug(message: @autoclosure () -> String, function: String = __FUNCTION__,
+func logDebug(@autoclosure message: () -> String, function: String = __FUNCTION__,
     file: String = __FILE__, line: UInt = __LINE__) {
         DDLog.log(.Debug, message: message, function: function, file: file, line: line)
 }
 
-func logVerbose(message: @autoclosure () -> String, function: String = __FUNCTION__,
+func logVerbose(@autoclosure message: () -> String, function: String = __FUNCTION__,
     file: String = __FILE__, line: UInt = __LINE__) {
         DDLog.log(.Verbose, message: message, function: function, file: file, line: line)
 }

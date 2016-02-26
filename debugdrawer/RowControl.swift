@@ -19,7 +19,7 @@ enum ControlType : String {
 }
 
 class RowControl: NSObject {
-    
+
     var name : String
     var type : ControlType
     init (name : String, type : ControlType) {
@@ -30,23 +30,23 @@ class RowControl: NSObject {
 }
 
 class SwitchControl : RowControl {
-    
+
     var block : Bool -> ()
     var value : Bool
-    
+
     init (initialValue: Bool, name : String, block: Bool -> ()) {
         self.block = block
         self.value = initialValue
         super.init(name: name, type: .Switch)
     }
-    
+
     func executeBlock (switchOn : Bool) {
         self.block(switchOn)
     }
 }
 
 class SliderControl : RowControl {
-    
+
     var block : Float -> ()
     var value : Float
 
@@ -55,7 +55,7 @@ class SliderControl : RowControl {
         self.value = initialValue
         super.init(name: name, type: .Slider)
     }
-    
+
     func executeBlock (sliderValue : Float) {
         self.block(sliderValue)
     }
@@ -63,14 +63,14 @@ class SliderControl : RowControl {
 }
 
 class ButtonControl : RowControl {
-    
+
     var block : () -> ()
-    
+
     init (name : String, block: () -> ()) {
         self.block = block
         super.init(name: name, type: .Button)
     }
-    
+
     func executeBlock () {
         self.block()
     }
@@ -78,14 +78,14 @@ class ButtonControl : RowControl {
 }
 
 class LabelControl : RowControl {
-    
+
     var label :String
-    
+
     init (name : String, label: String) {
         self.label = label
         super.init(name: name, type: .Label)
     }
-    
+
 }
 
 class HeaderControl : RowControl {
@@ -95,31 +95,42 @@ class HeaderControl : RowControl {
 }
 
 class TextInputControl : RowControl {
-    
+
     var block : String -> ()
     var value = ""
-    
+
     init (name : String, block: (String) -> ()) {
         self.block = block
-        
+
         if (Preferences.isSet(name)) {
 //            var val = Preferences.load(name) as String?
 //            var val: [NSString]? = Preferences.load(name) as? [NSString] //NSUserDefaults.standardUserDefaults().objectForKey("food") as? [NSString]
 //            self.value = val as String!
             self.value = Preferences.loadString(name)
             block(self.value)
-            
+
             print("VALUE: \(self.value)")
         }
-        
+
         super.init(name: name, type: .TextInput)
     }
-    
+
+    init (name : String, value: String, block: (String) -> ()) {
+        self.block = block
+
+        self.value = value
+        block(self.value)
+
+        print("VALUE: \(self.value)")
+
+        super.init(name: name, type: .TextInput)
+    }
+
     init (name : String, type:ControlType,  block: (String) -> ()) {
         self.block = block
         super.init(name: name, type: type)
     }
-    
+
     func executeBlock (input: String) {
         self.value = input
         Preferences.save(self.name, object: self.value)
@@ -129,23 +140,22 @@ class TextInputControl : RowControl {
 }
 
 class DropDownControl : RowControl {
-    
+
     var options : Dictionary<String,AnyObject>
     var block : AnyObject -> ()
     var value : String
     var optionStrings : Array<String>
-    
+
     init (initialValue: NSString, name : String, options: Dictionary<String,AnyObject>, block : (option: AnyObject) -> ()) {
-        self.value = initialValue
+        self.value = initialValue as String
         self.options = options
         self.optionStrings = [String](options.keys)
         self.block = block
         super.init(name: name, type: .DropDown)
     }
-    
+
     func executeBlock(input: String) {
         self.block(self.options[input]!)
     }
-    
-}
 
+}

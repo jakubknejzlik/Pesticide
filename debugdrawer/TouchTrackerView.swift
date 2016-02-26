@@ -12,10 +12,10 @@ let radius:CGFloat = 15
 
 class TouchTrackerView : UIView {
 
-    let circle : UIView = UIView()
+    var circle : UIView = UIView()
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     override init(frame: CGRect) {
@@ -28,7 +28,7 @@ class TouchTrackerView : UIView {
         circle.layer.borderWidth = 1
         circle.alpha = 0
 
-        circle.setTranslatesAutoresizingMaskIntoConstraints(false)
+        circle.translatesAutoresizingMaskIntoConstraints = false
 
         circle.frame = CGRectMake(0, 0, radius, radius)
 
