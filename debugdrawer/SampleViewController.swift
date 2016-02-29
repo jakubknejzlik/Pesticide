@@ -49,7 +49,7 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
                     return
                 }
                 if let times = Int(components[0]) {
-                    for count in 0..<times {
+                    for _ in 0..<times {
                         Pesticide.log("die, die, die")
                     }
                 }
@@ -60,7 +60,6 @@ class SampleViewController : UIViewController, UITextFieldDelegate {
             }
             
             Pesticide.addSlider(Float(self.view.alpha),name:"Alpha", block: { (value :Float) in
-                let currentColor = self.view.backgroundColor
                 self.view.alpha = CGFloat(value)
             })
             

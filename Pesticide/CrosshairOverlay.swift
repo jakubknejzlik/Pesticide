@@ -32,7 +32,7 @@ class CrosshairOverlay : UIView {
 
         horizontal.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), lineWidth)
         vertical.frame = CGRectMake(0, 0, lineWidth, CGRectGetHeight(self.bounds))
-        label.frame = CGRectMake(5, 10, 100, 30)
+        label.frame = CGRectMake(5, 10, 150, 30)
 
         self.addSubview(horizontal)
         self.addSubview(vertical)
@@ -61,6 +61,11 @@ class CrosshairOverlay : UIView {
         horizontal.frame = CGRectMake(0, point.y, CGRectGetWidth(self.bounds), lineWidth)
         vertical.frame = CGRectMake(point.x, 0, lineWidth, CGRectGetHeight(self.bounds))
 
-        label.text = "\(point.x), \(point.y)"
+        label.text = "\(roundPoint(point.x)), \(roundPoint(point.y))"
     }
+
+    private func roundPoint(p: CGFloat) -> CGFloat {
+        return round(p * 100) / 100
+    }
+
 }

@@ -24,7 +24,7 @@ extension DDLog {
     class func log(flag: DDLogFlag, @autoclosure message: () -> String,
         function: String = __FUNCTION__, file: String = __FILE__,  line: UInt = __LINE__) {
             if flag.rawValue & logLevel.rawValue != 0 {
-                var logMsg = DDLogMessage(message: message(), level: logLevel, flag: flag, context: 0,
+                let logMsg = DDLogMessage(message: message(), level: logLevel, flag: flag, context: 0,
                     file: file, function: function, line: line,
                     tag: nil, options: DDLogMessageOptions(rawValue: 0), timestamp: nil)
                 DDLog.log(logAsync, message: logMsg)

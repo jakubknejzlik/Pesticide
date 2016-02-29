@@ -45,12 +45,6 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
 
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "pickerViewDone")
         keyboardDoneButtonView.setItems([doneButton], animated: false)
-
-        //Pesticide.setDebugTableViewController(self)
-
-        if let window = UIApplication.sharedApplication().windows.first {
-            Pesticide.setWindow(window)
-        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -262,7 +256,7 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
         self.currentField?.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if  self.currentField == nil {
             return "oops"
         }

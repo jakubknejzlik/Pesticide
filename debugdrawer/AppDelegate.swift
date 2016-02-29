@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Pesticide.addHeader("Custom Controls")
         #endif
         
-        var rootView = SampleViewController()
+        let rootView = SampleViewController()
         
         if let window = self.window {
             window.rootViewController = rootView

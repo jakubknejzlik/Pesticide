@@ -88,7 +88,7 @@ public class Pesticide {
     }
     
     public class func toggle() {
-        var topVC :UIViewController = topViewController(CV.window.rootViewController!)
+        let topVC :UIViewController = topViewController(CV.window.rootViewController!)
         if (topVC.isKindOfClass(DebugTableController)) {
 
             topVC.dismissViewControllerAnimated(true, completion: nil)
