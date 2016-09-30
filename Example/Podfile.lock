@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (3.5.0)
+  - CocoaLumberjack (2.4.0):
+    - CocoaLumberjack/Default (= 2.4.0)
+    - CocoaLumberjack/Extensions (= 2.4.0)
+  - CocoaLumberjack/Core (2.4.0)
+  - CocoaLumberjack/Default (2.4.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.4.0):
+    - CocoaLumberjack/Default
+  - Pesticide (0.1.0):
+    - Alamofire (~> 3.5)
+    - CocoaLumberjack (~> 2.4.0)
+
+DEPENDENCIES:
+  - Pesticide (from `../`)
+
+EXTERNAL SOURCES:
+  Pesticide:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  Pesticide: 341051d947bd362aee31553a0fe33f292237ce0a
+
+PODFILE CHECKSUM: f626b73ac66302f587529e06c27ea0a1b5a03ff1
+
+COCOAPODS: 1.0.1
