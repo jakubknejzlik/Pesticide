@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'Pesticide'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of Pesticide.'
+  s.summary          = 'Runtime debugging menu and tools for iOS'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,15 +18,15 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Pesticide is a debugging framework for iOS which allows developers to use build in and custom debug controls at runtime. Pesticide was inspired by the Debug Drawer for Android.
                        DESC
 
   s.homepage         = 'https://github.com/inloop/Pesticide'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Jakub Knejzlik' => 'jakub.knejzlik@gmail.com' }
+  s.author           = { 'Jakub Knejzlik' => 'jakub.knejzlik@inloop.eu' }
   s.source           = { :git => 'https://github.com/inloop/Pesticide.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/inloopeu
+  s.social_media_url = 'https://twitter.com/inloop_eu'
 
   s.ios.deployment_target = '9.0'
 
