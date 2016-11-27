@@ -31,8 +31,8 @@ extension UIView {
 
     // This doesn't seem to always work..
     func deepCopy() -> UIView {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(self)
-        return (NSKeyedUnarchiver.unarchiveObjectWithData(data) as? UIView) ?? UIView()
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        return (NSKeyedUnarchiver.unarchiveObject(with: data) as? UIView) ?? UIView()
     }
 
 }

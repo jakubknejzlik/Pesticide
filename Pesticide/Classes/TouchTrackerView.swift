@@ -24,27 +24,27 @@ class TouchTrackerView : UIView {
 
         circle.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.9)
         circle.layer.cornerRadius = radius/2
-        circle.layer.borderColor = UIColor.grayColor().CGColor
+        circle.layer.borderColor = UIColor.gray.cgColor
         circle.layer.borderWidth = 1
         circle.alpha = 0
 
         circle.translatesAutoresizingMaskIntoConstraints = false
 
-        circle.frame = CGRectMake(0, 0, radius, radius)
+        circle.frame = CGRect(x: 0, y: 0, width: radius, height: radius)
 
         self.addSubview(circle)
     }
 
     // pass touches though this overlay view
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         self.setFramesFromPoint(point)
         showCircle()
         hideCircle()
         return false
     }
 
-    func setFramesFromPoint(point: CGPoint) {
-        circle.frame = CGRectMake(point.x, point.y, radius, radius)
+    func setFramesFromPoint(_ point: CGPoint) {
+        circle.frame = CGRect(x: point.x, y: point.y, width: radius, height: radius)
     }
 
     func showCircle() {
@@ -52,7 +52,7 @@ class TouchTrackerView : UIView {
     }
 
     func hideCircle() {
-        UIView.animateWithDuration(0.15, delay: 0.1, options: .CurveEaseIn, animations: { () -> Void in
+        UIView.animate(withDuration: 0.15, delay: 0.1, options: .curveEaseIn, animations: { () -> Void in
             self.circle.alpha = 0
         }, completion: nil)
     }

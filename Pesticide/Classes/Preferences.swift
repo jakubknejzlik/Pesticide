@@ -9,20 +9,20 @@
 import Foundation
 
 class Preferences {
-    class func save(key: String, object: AnyObject?) {
-        NSUserDefaults.standardUserDefaults().setObject(object, forKey: key)
-        NSUserDefaults.standardUserDefaults().synchronize()
+    class func save(_ key: String, object: AnyObject?) {
+        UserDefaults.standard.set(object, forKey: key)
+        UserDefaults.standard.synchronize()
     }
 
-    class func load(key: String) -> AnyObject? {
-        return NSUserDefaults.standardUserDefaults().valueForKey(key)
+    class func load(_ key: String) -> AnyObject? {
+        return UserDefaults.standard.value(forKey: key) as AnyObject?
     }
 
-    class func loadString(key: String) -> String {
-        return (NSUserDefaults.standardUserDefaults().valueForKey(key) as? String) ?? ""
+    class func loadString(_ key: String) -> String {
+        return (UserDefaults.standard.value(forKey: key) as? String) ?? ""
     }
 
-    class func isSet(key: String) -> Bool {
+    class func isSet(_ key: String) -> Bool {
         let object: AnyObject? = Preferences.load(key)
         return object != nil ? true : false
     }

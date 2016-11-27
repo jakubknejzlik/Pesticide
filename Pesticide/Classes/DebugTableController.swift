@@ -17,37 +17,37 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
 
     var sectionObjects = [SectionInfo()]
     let dropDownPicker = UIPickerView()
-    let consoleView = UITextView(frame: CGRectMake(0, 0, 320, 200))
+    let consoleView = UITextView(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
     var currentField : UITextField?
      let keyboardDoneButtonView = UIToolbar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = UIColor.darkGrayColor()
+        self.tableView.backgroundColor = UIColor.darkGray
         self.dropDownPicker.delegate = self
         self.dropDownPicker.dataSource = self
-        self.consoleView.editable = false
-        self.consoleView.backgroundColor = UIColor.darkGrayColor()
+        self.consoleView.isEditable = false
+        self.consoleView.backgroundColor = UIColor.darkGray
         self.consoleView.textContainerInset = UIEdgeInsetsMake(25, 0, 0, 0)
-        self.consoleView.textColor = UIColor.whiteColor()
-        self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
+        self.consoleView.textColor = UIColor.white
+        self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.interactive
         let cellIds : Array<ControlType> = [.Switch, .Slider, .Button, .TextInput, .Label, .Header]
         for type in cellIds {
-            self.tableView.registerNib(UINib(nibName: type.rawValue, bundle: NSBundle(forClass: DebugTableController.self)), forCellReuseIdentifier:type.rawValue)
+            self.tableView.register(UINib(nibName: type.rawValue, bundle: Bundle(for: DebugTableController.self)), forCellReuseIdentifier:type.rawValue)
         }
         self.readCurrentLog()
         self.tableView.tableHeaderView = self.consoleView
 
-        keyboardDoneButtonView.barStyle = UIBarStyle.Default
-        keyboardDoneButtonView.translucent = false
+        keyboardDoneButtonView.barStyle = UIBarStyle.default
+        keyboardDoneButtonView.isTranslucent = false
         keyboardDoneButtonView.tintColor = nil
         keyboardDoneButtonView.sizeToFit()
 
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "pickerViewDone")
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(DebugTableController.pickerViewDone))
         keyboardDoneButtonView.setItems([doneButton], animated: false)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.consoleView.scrollRangeToVisible(NSMakeRange(self.consoleView.text.characters.count - 1, 1))
     }
@@ -59,22 +59,22 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return self.sectionObjects.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         let info = self.sectionObjects[section]
         return info.rowObjects.count
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let sectionInfo = self.sectionObjects[indexPath.section]
-        let rowControl = sectionInfo.rowObjects[indexPath.row]
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+        let rowControl = sectionInfo.rowObjects[(indexPath as NSIndexPath).row]
 
         if rowControl.type == .Header {
             return 30.0
@@ -83,23 +83,23 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
         return 44.0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let sectionInfo = self.sectionObjects[indexPath.section]
-        let rowControl = sectionInfo.rowObjects[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+        let rowControl = sectionInfo.rowObjects[(indexPath as NSIndexPath).row]
         var identifier = rowControl.type
         if  identifier == .DropDown {
             identifier = .TextInput
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier.rawValue, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier.rawValue, for: indexPath)
         self.configureCell(cell, indexPath: indexPath)
         return cell
     }
 
     // MARK: - Configure Cell
 
-    func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
-        let sectionInfo = self.sectionObjects[indexPath.section]
-        let rowControl = sectionInfo.rowObjects[indexPath.row]
+    func configureCell(_ cell: UITableViewCell, indexPath: IndexPath) {
+        let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+        let rowControl = sectionInfo.rowObjects[(indexPath as NSIndexPath).row]
         guard let pesticideCell = cell as? PesticideCell else {
             return
         }
@@ -108,37 +108,37 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
         switch rowControl.type {
         case .Switch:
             if let switchCell = cell as? SwitchCell {
-                switchCell.switchControl.addTarget(self, action: Selector("switchChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+                switchCell.switchControl.addTarget(self, action: #selector(DebugTableController.switchChanged(_:)), for: UIControlEvents.valueChanged)
                 if let switchControl = rowControl as? SwitchControl {
-                    switchCell.switchControl.on = switchControl.value
+                    switchCell.switchControl.isOn = switchControl.value
                 }
             }
         case .Slider:
             if let sliderCell = cell as? SliderCell {
-                sliderCell.slider.addTarget(self, action: Selector("sliderChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+                sliderCell.slider.addTarget(self, action: #selector(DebugTableController.sliderChanged(_:)), for: UIControlEvents.valueChanged)
                 if let sliderControl = rowControl as? SliderControl {
                     sliderCell.slider.value = sliderControl.value
                 }
             }
         case .Button:
             if let buttonCell = cell as? ButtonCell {
-                buttonCell.button.addTarget(self, action: Selector("buttonTapped:"), forControlEvents: UIControlEvents.TouchUpInside)
+                buttonCell.button.addTarget(self, action: #selector(DebugTableController.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
             }
         case .DropDown:
             if let dropDown = cell as? TextFieldCell {
-                dropDown.textField.addTarget(self, action: Selector("editingEnded:"), forControlEvents: UIControlEvents.EditingDidEnd)
-                dropDown.textField.addTarget(self, action: Selector("editingBegan:"), forControlEvents: UIControlEvents.EditingDidBegin)
+                dropDown.textField.addTarget(self, action: #selector(DebugTableController.editingEnded(_:)), for: UIControlEvents.editingDidEnd)
+                dropDown.textField.addTarget(self, action: #selector(DebugTableController.editingBegan(_:)), for: UIControlEvents.editingDidBegin)
                 dropDown.textField.inputAccessoryView = keyboardDoneButtonView
                 dropDown.textField.inputView = self.dropDownPicker
                 dropDown.textField.delegate = self
-                dropDown.textField.tintColor = UIColor.clearColor()
+                dropDown.textField.tintColor = UIColor.clear
                 if let dropDownControl = rowControl as? DropDownControl {
                     dropDown.textField.text = dropDownControl.value
                 }
             }
         case .TextInput:
             if let textInput = cell as? TextFieldCell {
-                textInput.textField.addTarget(self, action: Selector("editingEnded:"), forControlEvents: UIControlEvents.EditingDidEnd)
+                textInput.textField.addTarget(self, action: #selector(DebugTableController.editingEnded(_:)), for: UIControlEvents.editingDidEnd)
                 textInput.textField.inputView = nil
                 if let textInputControl = rowControl as? TextInputControl {
                     textInput.textField.text = textInputControl.value
@@ -158,91 +158,90 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
     func readCurrentLog() {
         logInfo("Read log")
         let fileLogger = DDFileLogger()
-        let logFileInfo = fileLogger.currentLogFileInfo()
-        if let logData = NSData(contentsOfFile: logFileInfo.filePath) {
-            let logString = NSString(data: logData, encoding: NSUTF8StringEncoding)
+        let logFileInfo = fileLogger?.currentLogFileInfo
+        if let filePath = logFileInfo?.filePath, let logString = try? String(contentsOfFile: filePath, encoding: String.Encoding.utf8){
             self.consoleView.text = logString as? String
         }
         let consoleLogger = PesticideLogger()
         consoleLogger.textView = self.consoleView
-        DDLog.addLogger(consoleLogger)
+        DDLog.add(consoleLogger)
         logInfo("added log watcher")
     }
 
-    func addRowControl(rowControl : RowControl) {
+    func addRowControl(_ rowControl : RowControl) {
         self.sectionObjects[0].rowObjects.append(rowControl)
         self.tableView.reloadData()
     }
 
     // MARK: - Actions
 
-    func switchChanged(sender: UISwitch) {
+    func switchChanged(_ sender: UISwitch) {
         if let indexPath = self.indexPathForCellSubview(sender) {
-            let sectionInfo = self.sectionObjects[indexPath.section]
-            if let control = sectionInfo.rowObjects[indexPath.row] as? SwitchControl {
-                control.executeBlock(sender.on)
+            let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+            if let control = sectionInfo.rowObjects[(indexPath as NSIndexPath).row] as? SwitchControl {
+                control.executeBlock(sender.isOn)
             }
         }
     }
 
-    func sliderChanged(sender: UISlider) {
+    func sliderChanged(_ sender: UISlider) {
         if let indexPath = self.indexPathForCellSubview(sender) {
-            let sectionInfo = self.sectionObjects[indexPath.section]
-            if let control = sectionInfo.rowObjects[indexPath.row] as? SliderControl {
+            let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+            if let control = sectionInfo.rowObjects[(indexPath as NSIndexPath).row] as? SliderControl {
                 control.executeBlock(sender.value)
             }
         }
     }
 
-    func buttonTapped(sender: UIButton) {
+    func buttonTapped(_ sender: UIButton) {
         if let indexPath = self.indexPathForCellSubview(sender) {
-            let sectionInfo = self.sectionObjects[indexPath.section]
-            if let control = sectionInfo.rowObjects[indexPath.row] as? ButtonControl {
+            let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+            if let control = sectionInfo.rowObjects[(indexPath as NSIndexPath).row] as? ButtonControl {
                 control.executeBlock()
             }
         }
     }
 
-    func editingBegan(sender: UITextField) {
+    func editingBegan(_ sender: UITextField) {
         self.currentField = sender
     }
 
-    func editingEnded(sender: UITextField) {
+    func editingEnded(_ sender: UITextField) {
         if let indexPath = self.indexPathForCellSubview(sender) {
-            let sectionInfo = self.sectionObjects[indexPath.section]
-            if let control = sectionInfo.rowObjects[indexPath.row] as? TextInputControl {
+            let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+            if let control = sectionInfo.rowObjects[(indexPath as NSIndexPath).row] as? TextInputControl {
                 control.executeBlock(sender.text ?? "")
                 return
-            } else if let control = sectionInfo.rowObjects[indexPath.row] as? DropDownControl {
+            } else if let control = sectionInfo.rowObjects[(indexPath as NSIndexPath).row] as? DropDownControl {
                 control.executeBlock(sender.text ?? "")
             }
         }
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return false
     }
 
-    func indexPathForCellSubview(subview: UIView) -> NSIndexPath? {
-        let aPoint = self.tableView.convertPoint(CGPointZero, fromView: subview)
-        return self.tableView.indexPathForRowAtPoint(aPoint)
+    func indexPathForCellSubview(_ subview: UIView) -> IndexPath? {
+        let aPoint = self.tableView.convert(CGPoint.zero, from: subview)
+        return self.tableView.indexPathForRow(at: aPoint)
     }
 
-    func controlForCellSubview(cellView : UIView) -> RowControl? {
+    func controlForCellSubview(_ cellView : UIView) -> RowControl? {
         if let indexPath = self.indexPathForCellSubview(cellView) {
-            let sectionInfo = self.sectionObjects[indexPath.section]
-            return sectionInfo.rowObjects[indexPath.row]
+            let sectionInfo = self.sectionObjects[(indexPath as NSIndexPath).section]
+            return sectionInfo.rowObjects[(indexPath as NSIndexPath).row]
         }
         return nil
     }
 
     // MARK: - Picker view data source and delegate
 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if  self.currentField == nil {
             return 0
         }
@@ -252,11 +251,11 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
         return 0
     }
 
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.currentField?.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if  self.currentField == nil {
             return "oops"
         }
@@ -274,7 +273,7 @@ class DebugTableController: UITableViewController, UIPickerViewDelegate, UIPicke
         currentField?.resignFirstResponder()
 
         if let control = self.controlForCellSubview(self.currentField!) as? DropDownControl {
-            return control.optionStrings[dropDownPicker.selectedRowInComponent(0)]
+            return control.optionStrings[dropDownPicker.selectedRow(inComponent: 0)]
         }
         return "oops"
     }

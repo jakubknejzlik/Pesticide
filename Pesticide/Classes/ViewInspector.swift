@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class ViewInspector {
-    private var removedViews: [UIView] = []
+    fileprivate var removedViews: [UIView] = []
     var root: UIView
 
     init(rootView: UIView) {
@@ -18,13 +18,13 @@ class ViewInspector {
         self.recurseThroughSubviews(rootView)
     }
 
-    func recurseThroughSubviews(rootView: UIView) {
+    func recurseThroughSubviews(_ rootView: UIView) {
         // save default values
         rootView.saveDefaults()
 
         rootView.layer.borderWidth = 2.0
-        rootView.layer.borderColor = UIColor.redColor().CGColor
-        rootView.userInteractionEnabled = true
+        rootView.layer.borderColor = UIColor.red.cgColor
+        rootView.isUserInteractionEnabled = true
 
         self.addDeleteBlock(rootView)
 
@@ -33,17 +33,17 @@ class ViewInspector {
         }
     }
 
-    func addDeleteBlock(view: UIView) {
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+    func addDeleteBlock(_ view: UIView) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewInspector.handleTap(_:)))
         view.addGestureRecognizer(tapGesture)
     }
 
-    @objc func handleTap(tapGesture: UITapGestureRecognizer) {
+    @objc func handleTap(_ tapGesture: UITapGestureRecognizer) {
         let view = tapGesture.view!
         if (view.allSubviewsInvisble()) {
             self.removedViews.append(view)
             view.alpha = 0
-            view.userInteractionEnabled = false
+            view.isUserInteractionEnabled = false
         }
     }
 
@@ -51,7 +51,7 @@ class ViewInspector {
         if (removedViews.count > 0) {
             let last = removedViews.removeLast()
             last.restoreDefaults()
-            last.userInteractionEnabled = true
+            last.isUserInteractionEnabled = true
         }
     }
 
@@ -66,7 +66,7 @@ class ViewInspector {
         done(root)
     }
 
-    func done(rootView: UIView) {
+    func done(_ rootView: UIView) {
         rootView.restoreDefaults()
 
         for subview in rootView.subviews {

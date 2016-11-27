@@ -13,7 +13,7 @@ let kDateKey = "BuildDateKey"
 
 class BuildUtils {
     class func getGitHash() -> String {
-        if let hash =  NSBundle.mainBundle().objectForInfoDictionaryKey(kGitHashKey) as? String {
+        if let hash =  Bundle.main.object(forInfoDictionaryKey: kGitHashKey) as? String {
             return hash
         }
 
@@ -21,7 +21,7 @@ class BuildUtils {
     }
 
     class func getBuildNumberString() -> String {
-        if let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+        if let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
             return buildNumber
         }
 
@@ -29,7 +29,7 @@ class BuildUtils {
     }
 
     class func getVersionString() -> String {
-        if let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+        if let buildNumber = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             return buildNumber
         }
 
@@ -37,7 +37,7 @@ class BuildUtils {
     }
 
     class func getDateString() -> String {
-        if let hash =  NSBundle.mainBundle().objectForInfoDictionaryKey(kDateKey) as? String {
+        if let hash =  Bundle.main.object(forInfoDictionaryKey: kDateKey) as? String {
             return hash
         }
 

@@ -17,14 +17,14 @@ class ButtonCell: PesticideCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    override func setName (name: String){
-        self.button.setTitle(name, forState: UIControlState.Normal)
+    override func setName (_ name: String){
+        self.button.setTitle(name, for: UIControlState())
     }
 
 }

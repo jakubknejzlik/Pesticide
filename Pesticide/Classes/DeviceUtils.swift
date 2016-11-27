@@ -11,15 +11,15 @@ import UIKit
 
 class DeviceUtils {
     class func getDeviceVersionString() -> String {
-        let version = UIDevice.currentDevice().systemVersion
-        let model = UIDevice.currentDevice().model
+        let version = UIDevice.current.systemVersion
+        let model = UIDevice.current.model
 
         return "\(model) \(version)"
     }
 
     class func getResolutionString() -> String {
-        let screenSize = UIScreen.mainScreen().bounds
-        let scale = UIScreen.mainScreen().scale
+        let screenSize = UIScreen.main.bounds
+        let scale = UIScreen.main.scale
         let width = Int(screenSize.width*scale)
         let height = Int(screenSize.height*scale)
 

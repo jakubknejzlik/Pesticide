@@ -16,11 +16,11 @@ class TextFieldCell: PesticideCell,UITextFieldDelegate {
         super.awakeFromNib()
         // Initialization code
         textField.placeholder = "Value"
-        textField.returnKeyType = UIReturnKeyType.Go
+        textField.returnKeyType = UIReturnKeyType.go
         textField.delegate = self
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
 }

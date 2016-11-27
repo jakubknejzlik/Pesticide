@@ -25,46 +25,46 @@ class CrosshairOverlay : UIView {
 
         vertical.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.75)
         horizontal.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.75)
-        label.textColor = UIColor.redColor()
+        label.textColor = UIColor.red
 
         horizontal.translatesAutoresizingMaskIntoConstraints = false
         vertical.translatesAutoresizingMaskIntoConstraints = false
 
-        horizontal.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), lineWidth)
-        vertical.frame = CGRectMake(0, 0, lineWidth, CGRectGetHeight(self.bounds))
-        label.frame = CGRectMake(5, 10, 150, 30)
+        horizontal.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: lineWidth)
+        vertical.frame = CGRect(x: 0, y: 0, width: lineWidth, height: self.bounds.height)
+        label.frame = CGRect(x: 5, y: 10, width: 150, height: 30)
 
         self.addSubview(horizontal)
         self.addSubview(vertical)
         self.addSubview(label)
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        if let point = touch?.locationInView(self) {
+        if let point = touch?.location(in: self) {
             self.setFramesFromPoint(point)
         }
 
-        super.touchesBegan(touches, withEvent: event)
+        super.touchesBegan(touches, with: event)
     }
 
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        if let point = touch?.locationInView(self) {
+        if let point = touch?.location(in: self) {
             self.setFramesFromPoint(point)
         }
 
-        super.touchesMoved(touches, withEvent: event)
+        super.touchesMoved(touches, with: event)
     }
 
-    func setFramesFromPoint(point: CGPoint) {
-        horizontal.frame = CGRectMake(0, point.y, CGRectGetWidth(self.bounds), lineWidth)
-        vertical.frame = CGRectMake(point.x, 0, lineWidth, CGRectGetHeight(self.bounds))
+    func setFramesFromPoint(_ point: CGPoint) {
+        horizontal.frame = CGRect(x: 0, y: point.y, width: self.bounds.width, height: lineWidth)
+        vertical.frame = CGRect(x: point.x, y: 0, width: lineWidth, height: self.bounds.height)
 
         label.text = "\(roundPoint(point.x)), \(roundPoint(point.y))"
     }
 
-    private func roundPoint(p: CGFloat) -> CGFloat {
+    fileprivate func roundPoint(_ p: CGFloat) -> CGFloat {
         return round(p * 100) / 100
     }
 

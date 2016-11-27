@@ -7,8 +7,8 @@ import CocoaLumberjack
 
 extension DDLog {
     
-    private struct State {
-        static var logLevel: DDLogLevel = .Error
+    fileprivate struct State {
+        static var logLevel: DDLogLevel = .error
         static var logAsync: Bool = true
     }
     
@@ -18,42 +18,42 @@ extension DDLog {
     }
     
     class var logAsync: Bool {
-        get { return (self.logLevel != .Error) && State.logAsync }
+        get { return (self.logLevel != .error) && State.logAsync }
         set { State.logAsync = newValue }
     }
     
-    class func log(flag: DDLogFlag, @autoclosure message: () -> String,
-        function: String = __FUNCTION__, file: String = __FILE__,  line: UInt = __LINE__) {
+    class func log(_ flag: DDLogFlag, message: @autoclosure () -> String,
+        function: String = #function, file: String = #file,  line: UInt = #line) {
             if flag.rawValue & logLevel.rawValue != 0 {
                 let logMsg = DDLogMessage(message: message(), level: logLevel, flag: flag, context: 0,
                     file: file, function: function, line: line,
                     tag: nil, options: DDLogMessageOptions(rawValue: 0), timestamp: nil)
-                DDLog.log(logAsync, message: logMsg)
+                DDLog.log(asynchronous: logAsync, message: logMsg)
             }
     }
 }
 
-func logError(@autoclosure message: () -> String, function: String = __FUNCTION__,
-    file: String = __FILE__, line: UInt = __LINE__) {
-        DDLog.log(.Error, message: message, function: function, file: file, line: line)
+func logError(_ message: @autoclosure () -> String, function: String = #function,
+    file: String = #file, line: UInt = #line) {
+        DDLog.log(.error, message: message, function: function, file: file, line: line)
 }
 
-func logWarn(@autoclosure message: () -> String, function: String = __FUNCTION__,
-    file: String = __FILE__, line: UInt = __LINE__) {
-        DDLog.log(.Warning, message: message, function: function, file: file, line: line)
+func logWarn(_ message: @autoclosure () -> String, function: String = #function,
+    file: String = #file, line: UInt = #line) {
+        DDLog.log(.warning, message: message, function: function, file: file, line: line)
 }
 
-func logInfo(@autoclosure message: () -> String, function: String = __FUNCTION__,
-    file: String = __FILE__, line: UInt = __LINE__) {
-        DDLog.log(.Info, message: message, function: function, file: file, line: line)
+func logInfo(_ message: @autoclosure () -> String, function: String = #function,
+    file: String = #file, line: UInt = #line) {
+        DDLog.log(.info, message: message, function: function, file: file, line: line)
 }
 
-func logDebug(@autoclosure message: () -> String, function: String = __FUNCTION__,
-    file: String = __FILE__, line: UInt = __LINE__) {
-        DDLog.log(.Debug, message: message, function: function, file: file, line: line)
+func logDebug(_ message: @autoclosure () -> String, function: String = #function,
+    file: String = #file, line: UInt = #line) {
+        DDLog.log(.debug, message: message, function: function, file: file, line: line)
 }
 
-func logVerbose(@autoclosure message: () -> String, function: String = __FUNCTION__,
-    file: String = __FILE__, line: UInt = __LINE__) {
-        DDLog.log(.Verbose, message: message, function: function, file: file, line: line)
+func logVerbose(_ message: @autoclosure () -> String, function: String = #function,
+    file: String = #file, line: UInt = #line) {
+        DDLog.log(.verbose, message: message, function: function, file: file, line: line)
 }

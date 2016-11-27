@@ -21,6 +21,6 @@ class DebugView : UIView {
     }
 
     func initInit() {
-        self.backgroundColor = .yellowColor()
+        self.backgroundColor = .yellow
     }
 }

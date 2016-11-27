@@ -38,6 +38,6 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
-  s.dependency 'Alamofire', '~> 3.5'
-  s.dependency 'CocoaLumberjack', '~> 2.4.0'
+  s.dependency 'Alamofire', '~> 4.2'
+  s.dependency 'CocoaLumberjack', '~> 3.0'
 end

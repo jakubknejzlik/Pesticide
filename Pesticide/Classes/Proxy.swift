@@ -10,11 +10,11 @@ import Foundation
 
 class Proxy {
     // creates a NSURLSessionConfiguration object from a string in the form host:port
-    class func createSessionConfiguration(hostAndPort: String) -> NSURLSessionConfiguration {
-        let hostAndPortArr = hostAndPort.componentsSeparatedByString(":")
+    class func createSessionConfiguration(_ hostAndPort: String) -> URLSessionConfiguration {
+        let hostAndPortArr = hostAndPort.components(separatedBy: ":")
 
         if hostAndPortArr.count != 2 {
-            return NSURLSessionConfiguration.defaultSessionConfiguration()
+            return URLSessionConfiguration.default
         }
 
         let host = hostAndPortArr[0]
@@ -24,19 +24,19 @@ class Proxy {
             return createSessionConfigurationFromHost(host, port: port!)
         }
 
-        return NSURLSessionConfiguration.defaultSessionConfiguration()
+        return URLSessionConfiguration.default
     }
 
     // creates a NSURLSessionConfiguration object from a host and port
-    class func createSessionConfigurationFromHost(host: String, port: Int) -> NSURLSessionConfiguration  {
+    class func createSessionConfigurationFromHost(_ host: String, port: Int) -> URLSessionConfiguration  {
         let dict = [
             kCFNetworkProxiesHTTPEnable as NSString : true,
             kCFStreamPropertyHTTPProxyPort : port,
             kCFStreamPropertyHTTPProxyHost : host as NSString
 
-        ]
+        ] as [NSString : Any]
 
-        let sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.connectionProxyDictionary = dict
 
         return sessionConfiguration

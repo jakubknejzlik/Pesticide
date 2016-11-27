@@ -31,32 +31,32 @@ class RowControl: NSObject {
 
 class SwitchControl : RowControl {
 
-    var block : Bool -> ()
+    var block : (Bool) -> ()
     var value : Bool
 
-    init (initialValue: Bool, name : String, block: Bool -> ()) {
+    init (initialValue: Bool, name : String, block: @escaping (Bool) -> ()) {
         self.block = block
         self.value = initialValue
         super.init(name: name, type: .Switch)
     }
 
-    func executeBlock (switchOn : Bool) {
+    func executeBlock (_ switchOn : Bool) {
         self.block(switchOn)
     }
 }
 
 class SliderControl : RowControl {
 
-    var block : Float -> ()
+    var block : (Float) -> ()
     var value : Float
 
-    init (initialValue: Float, name : String, block: Float -> ()) {
+    init (initialValue: Float, name : String, block: @escaping (Float) -> ()) {
         self.block = block
         self.value = initialValue
         super.init(name: name, type: .Slider)
     }
 
-    func executeBlock (sliderValue : Float) {
+    func executeBlock (_ sliderValue : Float) {
         self.block(sliderValue)
     }
 
@@ -66,7 +66,7 @@ class ButtonControl : RowControl {
 
     var block : () -> ()
 
-    init (name : String, block: () -> ()) {
+    init (name : String, block: @escaping () -> ()) {
         self.block = block
         super.init(name: name, type: .Button)
     }
@@ -96,10 +96,10 @@ class HeaderControl : RowControl {
 
 class TextInputControl : RowControl {
 
-    var block : String -> ()
+    var block : (String) -> ()
     var value = ""
 
-    init (name : String, block: (String) -> ()) {
+    init (name : String, block: @escaping (String) -> ()) {
         self.block = block
 
         if (Preferences.isSet(name)) {
@@ -115,7 +115,7 @@ class TextInputControl : RowControl {
         super.init(name: name, type: .TextInput)
     }
 
-    init (name : String, value: String, block: (String) -> ()) {
+    init (name : String, value: String, block: @escaping (String) -> ()) {
         self.block = block
 
         self.value = value
@@ -126,14 +126,14 @@ class TextInputControl : RowControl {
         super.init(name: name, type: .TextInput)
     }
 
-    init (name : String, type:ControlType,  block: (String) -> ()) {
+    init (name : String, type:ControlType,  block: @escaping (String) -> ()) {
         self.block = block
         super.init(name: name, type: type)
     }
 
-    func executeBlock (input: String) {
+    func executeBlock (_ input: String) {
         self.value = input
-        Preferences.save(self.name, object: self.value)
+        Preferences.save(self.name, object: self.value as? AnyObject)
         self.block(input)
     }
 
@@ -142,11 +142,11 @@ class TextInputControl : RowControl {
 class DropDownControl : RowControl {
 
     var options : Dictionary<String,AnyObject>
-    var block : AnyObject -> ()
+    var block : (AnyObject) -> ()
     var value : String
     var optionStrings : Array<String>
 
-    init (initialValue: NSString, name : String, options: Dictionary<String,AnyObject>, block : (option: AnyObject) -> ()) {
+    init (initialValue: NSString, name : String, options: Dictionary<String,AnyObject>, block : @escaping (_ option: AnyObject) -> ()) {
         self.value = initialValue as String
         self.options = options
         self.optionStrings = [String](options.keys)
@@ -154,7 +154,7 @@ class DropDownControl : RowControl {
         super.init(name: name, type: .DropDown)
     }
 
-    func executeBlock(input: String) {
+    func executeBlock(_ input: String) {
         self.block(self.options[input]!)
     }
 

@@ -9,19 +9,19 @@
 import CocoaLumberjack
 
 public enum PesticideControlType {
-    case Button
-    case Switch
-    case Slider
-    case Dropdown
-    case Label
-    case Header
+    case button
+    case `switch`
+    case slider
+    case dropdown
+    case label
+    case header
 }
 
-public class Pesticide {
+open class Pesticide {
     
-    private struct CV {
+    fileprivate struct CV {
         static let debugVC = DebugTableController()
-        static var commands = Dictionary<String, Array<String> -> ()>()
+        static var commands = Dictionary<String, (Array<String>) -> ()>()
         static var window = UIWindow()
         static var isSetup = false
         static var viewInspector: ViewInspector?
@@ -30,11 +30,11 @@ public class Pesticide {
         static var hasCommandPrompt = false
     }
 
-    public class func log(message: String) {
+    open class func log(_ message: String) {
         logInfo(message)
     }
     
-    public class func addCommand(commandName: String, block: Array<String> -> ()) {
+    open class func addCommand(_ commandName: String, block: @escaping (Array<String>) -> ()) {
         if !CV.hasCommandPrompt {
             self.addTextInput("Commands", block: {(command: String) in
                 if command.characters.count < 1 {
@@ -47,55 +47,55 @@ public class Pesticide {
         CV.commands[commandName] = block
     }
     
-    class func runFullCommand(command: String) {
-        var components = command.componentsSeparatedByString(" ")
-        let name = components.removeAtIndex(0)
+    class func runFullCommand(_ command: String) {
+        var components = command.components(separatedBy: " ")
+        let name = components.remove(at: 0)
         let block = CV.commands[name]
         block?(components)
     }
     
-    public class func addSwitch(initialValue: Bool, name: String, block: Bool -> ()) {
+    open class func addSwitch(_ initialValue: Bool, name: String, block: @escaping (Bool) -> ()) {
         CV.debugVC.addRowControl(SwitchControl(initialValue: initialValue, name: name, block: block))
     }
     
-    public class func addButton(name: String, block: () -> ()) {
+    open class func addButton(_ name: String, block: @escaping () -> ()) {
         CV.debugVC.addRowControl(ButtonControl(name: name, block: block))
     }
     
-    public class func addSlider(initialValue: Float, name: String, block: Float -> ()) {
+    open class func addSlider(_ initialValue: Float, name: String, block: @escaping (Float) -> ()) {
         CV.debugVC.addRowControl(SliderControl(initialValue: initialValue, name: name, block: block))
     }
     
-    public class func addDropdown(initialValue: String, name: String, options: Dictionary<String,AnyObject>, block: (option: AnyObject) -> ()) {
-        CV.debugVC.addRowControl(DropDownControl(initialValue: initialValue, name: name, options:options, block: block))
+    open class func addDropdown(_ initialValue: String, name: String, options: Dictionary<String,AnyObject>, block: @escaping (_ option: AnyObject) -> ()) {
+        CV.debugVC.addRowControl(DropDownControl(initialValue: initialValue as NSString, name: name, options:options, block: block))
     }
     
-    public class func addLabel(name: String, label: String) {
+    open class func addLabel(_ name: String, label: String) {
         CV.debugVC.addRowControl(LabelControl(name: name, label: label))
     }
     
-    public class func addTextInput(name: String, block: (String) -> ()) {
+    open class func addTextInput(_ name: String, block: @escaping (String) -> ()) {
         CV.debugVC.addRowControl(TextInputControl(name: name, block: block))
     }
 
-    public class func addHeader(name: String) {
+    open class func addHeader(_ name: String) {
         CV.debugVC.addRowControl(HeaderControl(name: name))
     }
     
-    public class func addProxy(block: (NSURLSessionConfiguration) -> ()) {
+    open class func addProxy(_ block: @escaping (URLSessionConfiguration) -> ()) {
         Pesticide.addTextInput("Proxy", block: { (hostAndPort: String) in
             let config = Proxy.createSessionConfiguration(hostAndPort)
             block(config)
         })
     }
     
-    public class func toggle() {
+    open class func toggle() {
         let topVC :UIViewController = topViewController(CV.window.rootViewController!)
-        if (topVC.isKindOfClass(DebugTableController)) {
+        if (topVC.isKind(of: DebugTableController.self)) {
 
-            topVC.dismissViewControllerAnimated(true, completion: nil)
+            topVC.dismiss(animated: true, completion: nil)
         } else {
-            topVC.presentViewController(CV.debugVC, animated: true, completion: nil)
+            topVC.present(CV.debugVC, animated: true, completion: nil)
         }
     }
     
@@ -105,7 +105,7 @@ public class Pesticide {
     
 // MARK: setter functions
     
-    public class func setWindow(window :UIWindow) {
+    open class func setWindow(_ window :UIWindow) {
         if (!CV.isSetup) {
             Pesticide.setup()
         }
@@ -117,7 +117,7 @@ public class Pesticide {
     
 // MARK: private functions
     
-    private class func setup() {
+    fileprivate class func setup() {
         self.setupLogging()
         // Build information
         Pesticide.addHeader("Build Information")
@@ -170,37 +170,37 @@ public class Pesticide {
         CV.isSetup = true
     }
     
-    private class func setupLogging () {
+    fileprivate class func setupLogging () {
         Pesticide.startLogging()
         //Logging
         Pesticide.addHeader("Logging")
         
         let logOptions = ["All":"All","Verbose":"Verbose","Debug":"Debug","Info":"Info","Warning":"Warning","Error":"Error","Off":"Off"];
-        Pesticide.addDropdown("Verbose", name: "Log Level", options: logOptions, block: {(option:AnyObject) in
+        Pesticide.addDropdown("Verbose", name: "Log Level", options: logOptions as Dictionary<String, AnyObject>, block: {(option:AnyObject) in
             if let newLevel = option as? String {
                 switch newLevel {
                 case "All":
-                    DDLog.logLevel = .All
+                    DDLog.logLevel = .all
                 case "Verbose":
-                    DDLog.logLevel = .Verbose
+                    DDLog.logLevel = .verbose
                 case "Debug":
-                    DDLog.logLevel = .Debug
+                    DDLog.logLevel = .debug
                 case "Info":
-                    DDLog.logLevel = .Info
+                    DDLog.logLevel = .info
                 case "Warning":
-                    DDLog.logLevel = .Warning
+                    DDLog.logLevel = .warning
                 case "Error":
-                    DDLog.logLevel = .Error
+                    DDLog.logLevel = .error
                 case "Off":
-                    DDLog.logLevel = .Off
+                    DDLog.logLevel = .off
                 default:
-                    DDLog.logLevel = .Verbose
+                    DDLog.logLevel = .verbose
                 }
             }
         })
     }
     
-    private class func topViewController(rootController :UIViewController)->UIViewController {
+    fileprivate class func topViewController(_ rootController :UIViewController)->UIViewController {
         if (rootController.presentedViewController != nil) {
             return topViewController(rootController.presentedViewController!)
         } else {
@@ -208,13 +208,13 @@ public class Pesticide {
         }
     }
     
-    private class func startLogging () {
-        DDLog.logLevel = .Verbose
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
-        DDLog.addLogger(DDASLLogger.sharedInstance())
+    fileprivate class func startLogging () {
+        DDLog.logLevel = .verbose
+        DDLog.add(DDTTYLogger.sharedInstance())
+        DDLog.add(DDASLLogger.sharedInstance())
         let fileLogger = DDFileLogger()
-        fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.addLogger(fileLogger)
+        fileLogger?.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+        fileLogger?.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
     }
 }

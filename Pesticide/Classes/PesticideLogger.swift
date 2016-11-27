@@ -12,18 +12,18 @@ import CocoaLumberjack
 class PesticideLogger: DDAbstractLogger {
 
     var textView : UITextView?
-    var dateFormatter : NSDateFormatter
+    var dateFormatter : DateFormatter
     override init() {
-        dateFormatter = NSDateFormatter()
+        dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
         super.init()
     }
 
-    override func logMessage(logMessage: DDLogMessage!) {
+    override func log(message logMessage: DDLogMessage!) {
         if  self.textView != nil {
             if  logMessage != nil {
                 var logString = self.formatMessage(logMessage)
-                dispatch_async(dispatch_get_main_queue(),{
+                DispatchQueue.main.async(execute: {
                     if var currentText = self.textView!.text {
                         currentText = currentText + logString
                         logString = currentText
@@ -36,10 +36,10 @@ class PesticideLogger: DDAbstractLogger {
         return
     }
 
-    func formatMessage(logMessage : DDLogMessage) -> String {
+    func formatMessage(_ logMessage : DDLogMessage) -> String {
         let message = logMessage.message
         let date = logMessage.timestamp
-        let dateString = self.dateFormatter.stringFromDate(date)
+        let dateString = self.dateFormatter.string(from: date!)
         return "\(dateString)  \(message)"
     }
 }
