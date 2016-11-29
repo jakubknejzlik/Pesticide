@@ -16,11 +16,11 @@ var kBorderColorAssociationKey = "kBorderColorAssociationKey"
 
 extension UIView {
     func allSubviewsInvisble() -> Bool {
-        if (self.subviews.count == 0) {
+        if (subviews.count == 0) {
             return true
         }
 
-        for subview in self.subviews {
+        for subview in subviews {
             if subview.alpha != 0 {
                 return false
             }

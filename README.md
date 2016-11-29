@@ -1,6 +1,6 @@
 # Pesticide
 
-[![CI Status](http://img.shields.io/travis/Jakub Knejzlik/Pesticide.svg?style=flat)](https://travis-ci.org/Jakub Knejzlik/Pesticide)
+[![CI Status](http://img.shields.io/travis/inloop/Pesticide.svg?style=flat)](https://travis-ci.org/inloop/Pesticide)
 [![Version](https://img.shields.io/cocoapods/v/Pesticide.svg?style=flat)](http://cocoapods.org/pods/Pesticide)
 [![License](https://img.shields.io/cocoapods/l/Pesticide.svg?style=flat)](http://cocoapods.org/pods/Pesticide)
 [![Platform](https://img.shields.io/cocoapods/p/Pesticide.svg?style=flat)](http://cocoapods.org/pods/Pesticide)
@@ -19,10 +19,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "Pesticide"
 ```
-
-## Author
-
-Jakub Knejzlik, jakub.knejzlik@gmail.com
 
 ## License
 

@@ -30,19 +30,19 @@ class CrosshairOverlay : UIView {
         horizontal.translatesAutoresizingMaskIntoConstraints = false
         vertical.translatesAutoresizingMaskIntoConstraints = false
 
-        horizontal.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: lineWidth)
-        vertical.frame = CGRect(x: 0, y: 0, width: lineWidth, height: self.bounds.height)
+        horizontal.frame = CGRect(x: 0, y: 0, width: bounds.width, height: lineWidth)
+        vertical.frame = CGRect(x: 0, y: 0, width: lineWidth, height: bounds.height)
         label.frame = CGRect(x: 5, y: 10, width: 150, height: 30)
 
-        self.addSubview(horizontal)
-        self.addSubview(vertical)
-        self.addSubview(label)
+        addSubview(horizontal)
+        addSubview(vertical)
+        addSubview(label)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if let point = touch?.location(in: self) {
-            self.setFramesFromPoint(point)
+            setFramesFromPoint(point)
         }
 
         super.touchesBegan(touches, with: event)
@@ -51,15 +51,15 @@ class CrosshairOverlay : UIView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if let point = touch?.location(in: self) {
-            self.setFramesFromPoint(point)
+            setFramesFromPoint(point)
         }
 
         super.touchesMoved(touches, with: event)
     }
 
     func setFramesFromPoint(_ point: CGPoint) {
-        horizontal.frame = CGRect(x: 0, y: point.y, width: self.bounds.width, height: lineWidth)
-        vertical.frame = CGRect(x: point.x, y: 0, width: lineWidth, height: self.bounds.height)
+        horizontal.frame = CGRect(x: 0, y: point.y, width: bounds.width, height: lineWidth)
+        vertical.frame = CGRect(x: point.x, y: 0, width: lineWidth, height: bounds.height)
 
         label.text = "\(roundPoint(point.x)), \(roundPoint(point.y))"
     }

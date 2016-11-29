@@ -32,12 +32,12 @@ class TouchTrackerView : UIView {
 
         circle.frame = CGRect(x: 0, y: 0, width: radius, height: radius)
 
-        self.addSubview(circle)
+        addSubview(circle)
     }
 
     // pass touches though this overlay view
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        self.setFramesFromPoint(point)
+        setFramesFromPoint(point)
         showCircle()
         hideCircle()
         return false
@@ -48,7 +48,7 @@ class TouchTrackerView : UIView {
     }
 
     func showCircle() {
-        self.circle.alpha = 1;
+        circle.alpha = 1;
     }
 
     func hideCircle() {

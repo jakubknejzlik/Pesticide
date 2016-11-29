@@ -17,7 +17,7 @@ public enum PesticideControlType {
     case header
 }
 
-open class Pesticide {
+public final class Pesticide {
     
     fileprivate struct CV {
         static let debugVC = DebugTableController()
@@ -36,7 +36,7 @@ open class Pesticide {
     
     open class func addCommand(_ commandName: String, block: @escaping (Array<String>) -> ()) {
         if !CV.hasCommandPrompt {
-            self.addTextInput("Commands", block: {(command: String) in
+            addTextInput("Commands", block: {(command: String) in
                 if command.characters.count < 1 {
                     return
                 }
@@ -118,7 +118,7 @@ open class Pesticide {
 // MARK: private functions
     
     fileprivate class func setup() {
-        self.setupLogging()
+        setupLogging()
         // Build information
         Pesticide.addHeader("Build Information")
 

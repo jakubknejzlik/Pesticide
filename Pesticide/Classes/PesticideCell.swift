@@ -14,11 +14,11 @@ class PesticideCell : UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        selectionStyle = UITableViewCellSelectionStyle.none
     }
 
     func setName (_ name: String){
-        self.nameLabel.text = name
+        nameLabel.text = name
     }
 
 }

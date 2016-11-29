@@ -18,7 +18,7 @@ extension DDLog {
     }
     
     class var logAsync: Bool {
-        get { return (self.logLevel != .error) && State.logAsync }
+        get { return (logLevel != .error) && State.logAsync }
         set { State.logAsync = newValue }
     }
     

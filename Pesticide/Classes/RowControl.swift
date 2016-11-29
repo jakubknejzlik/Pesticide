@@ -57,7 +57,7 @@ class SliderControl : RowControl {
     }
 
     func executeBlock (_ sliderValue : Float) {
-        self.block(sliderValue)
+        block(sliderValue)
     }
 
 }
@@ -72,7 +72,7 @@ class ButtonControl : RowControl {
     }
 
     func executeBlock () {
-        self.block()
+        block()
     }
 
 }
@@ -132,9 +132,9 @@ class TextInputControl : RowControl {
     }
 
     func executeBlock (_ input: String) {
-        self.value = input
-        Preferences.save(self.name, object: self.value as? AnyObject)
-        self.block(input)
+        value = input
+        Preferences.save(name, object: value as? AnyObject)
+        block(input)
     }
 
 }
@@ -155,7 +155,7 @@ class DropDownControl : RowControl {
     }
 
     func executeBlock(_ input: String) {
-        self.block(self.options[input]!)
+        block(options[input]!)
     }
 
 }

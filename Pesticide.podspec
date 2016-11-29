@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/inloop/Pesticide'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Jakub Knejzlik' => 'jakub.knejzlik@gmail.com' }
+  s.author           = { }
   s.source           = { :git => 'https://github.com/inloop/Pesticide.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/inloopeu
 

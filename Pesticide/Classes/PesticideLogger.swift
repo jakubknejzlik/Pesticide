@@ -20,9 +20,9 @@ class PesticideLogger: DDAbstractLogger {
     }
 
     override func log(message logMessage: DDLogMessage!) {
-        if  self.textView != nil {
+        if textView != nil {
             if  logMessage != nil {
-                var logString = self.formatMessage(logMessage)
+                var logString = formatMessage(logMessage)
                 DispatchQueue.main.async(execute: {
                     if var currentText = self.textView!.text {
                         currentText = currentText + logString
@@ -39,7 +39,7 @@ class PesticideLogger: DDAbstractLogger {
     func formatMessage(_ logMessage : DDLogMessage) -> String {
         let message = logMessage.message
         let date = logMessage.timestamp
-        let dateString = self.dateFormatter.string(from: date!)
+        let dateString = dateFormatter.string(from: date!)
         return "\(dateString)  \(message)"
     }
 }

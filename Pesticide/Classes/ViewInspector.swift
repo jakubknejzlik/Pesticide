@@ -15,7 +15,7 @@ class ViewInspector {
 
     init(rootView: UIView) {
         root = rootView
-        self.recurseThroughSubviews(rootView)
+        recurseThroughSubviews(rootView)
     }
 
     func recurseThroughSubviews(_ rootView: UIView) {
@@ -26,10 +26,10 @@ class ViewInspector {
         rootView.layer.borderColor = UIColor.red.cgColor
         rootView.isUserInteractionEnabled = true
 
-        self.addDeleteBlock(rootView)
+        addDeleteBlock(rootView)
 
         for subview in rootView.subviews {
-            self.recurseThroughSubviews(subview)
+            recurseThroughSubviews(subview)
         }
     }
 
@@ -41,7 +41,7 @@ class ViewInspector {
     @objc func handleTap(_ tapGesture: UITapGestureRecognizer) {
         let view = tapGesture.view!
         if (view.allSubviewsInvisble()) {
-            self.removedViews.append(view)
+            removedViews.append(view)
             view.alpha = 0
             view.isUserInteractionEnabled = false
         }

@@ -24,7 +24,7 @@ class ButtonCell: PesticideCell {
     }
 
     override func setName (_ name: String){
-        self.button.setTitle(name, for: UIControlState())
+        button.setTitle(name, for: UIControlState())
     }
 
 }
